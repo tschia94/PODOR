@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Podor</title>
+</head>
+<body>
+
+{% block title %}PODOR IMAGE UPLOADER{% endblock %}
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Upload Pothole Image</h1>
+            <hr>
+            <form action="/upload-image" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Select image:</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="image" id="image">
+                    </div>
+                </div>
+                </br>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+
+            <hr>
+            <form action="/pothole-prediction" method="POST" enctype="multipart/form-data">
+                <label for="img_path">Image Path:</label>
+                <input type="text" id="img_path" name="img_path" value="{{img_path}}" size="150"><br>
+
+                <input type="hidden" id="img_filename" name="img_filename" value="{{img_filename}} " size="50"><br>
+
+
+                <input type="radio" id="mrcnn" name="model" value="mrcnn">
+                <label for="mrcnn">Masked RCNN</label><br>
+
+                <input type="radio" id="deeplabv3" name="model" value="deeplabv3">
+                <label for="deeplabv3">Deeplabv3</label><br>
+                <br>
+                <button type="submit" class="btn btn-primary">Predict</button>
+            </form>
+        </div>
+        <hr>
+        <div class="col">
+            <h1>Predictions</h1>
+            {% if predictions is defined %}
+            <table border="1">
+
+                <tr>
+                    <td>{{predictions['img_path']}}</td>
+                    <td>{{predictions['masked_image_path']}}</td>
+
+                    <td>{{predictions['boundaryboxes']}}</td>
+                    <td>{{predictions['classes']}}</td>
+                    <td>{{predictions['masks']}}</td>
+                    <td>{{predictions['scores']}}</td>
+
+                    <!--                 <img src="{{'file:///D:/Python%20Projects/potholes/pothole1.png'}}">-->
+                </tr>
+
+            </table>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>
+

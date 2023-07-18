@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Podor</title>
+</head>
+<body>
+
+{% block title %}PODOR Dashboard{% endblock %}
+{% block main %}
+<div class="container">
+    <div class="row">
+
+        <div class="col">
+            <h1>Predictions</h1>
+            <table>
+                {% for prediction in predictions %}
+                <tr>
+                    <td>{{prediction[0]}}</td>
+<!--                    <td><img src="'file://'+ prediction[0]}}"></td>-->
+                    <td><img src="{{'file:///C:/Users/Priya/OneDrive/Documents/SMU/Study/Semester 4/Deep learning for visual recognition/Project/podor/predictions/pothole1.png'}}"></td>
+                    <td>{{prediction[1]}}</td>
+                    <td>{{prediction[2]}}</td>
+                    <td>{{prediction[3]}}</td>
+                    <td>{{prediction[4]}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>
+
